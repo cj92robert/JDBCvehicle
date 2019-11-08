@@ -1,0 +1,81 @@
+<div>
+  <button (click)="showForm()"  class="btn btn-light btn-lg btn-block">Dodaj nowy pojazd</button>
+  <div *ngIf="vehicles == null || vehicles.length == 0 " class="alert alert-danger" role="alert">
+    Lista jest pusta!
+  </div>
+  <br>
+  <div *ngIf="showAdder">
+    <div class="form-group">
+      <label for="InputMark">Marka</label>
+      <input type="text" class="form-control" id="InputMark" [(ngModel)]="newVehicle.brand"  placeholder="Marka">
+    </div>
+    <div class="form-group">
+      <label for="InputModel">Model</label>
+      <input type="text" class="form-control" id="InputModel"  [(ngModel)]="newVehicle.model" placeholder="Model">
+    </div>
+    <div class="form-group">
+      <label for="InputColor">Color</label>
+      <input type="text" class="form-control" id="InputColor" [(ngModel)]="newVehicle.color"  placeholder="Kolor">
+    </div>
+    <div class="form-group">
+      <label for="InputData">Data produkcji</label>
+      <input type="text" class="form-control" id="InputData" [(ngModel)]="newVehicle.productionYear"  placeholder="Data produkcji">
+    </div>
+    <button (click)="addVehicle()"  class="btn btn-primary btn-lg btn-block">Zapisz pojazd</button>
+  </div>
+  <p><br></p>
+  <label for="InputDataBeg">Data produkcji od  &nbsp; </label>
+  <input  type="text" (change)="refresh()"  class="" id="InputDataBeg" [(ngModel)]="dataBeg"  placeholder="0">
+  <label for="InputDataEnd"> &nbsp; Data produkcji do&nbsp; </label>
+  <input  type="text" (change)="refresh()"  class="" id="InputDataEnd" [(ngModel)]="dataEnd"  placeholder="&infin;">
+  <br>
+
+    <table class="table table-hover">
+
+
+      <tr>
+      <th>Id</th>
+      <th>Marka</th>
+      <th>Model</th>
+      <th>Kolor</th>
+      <th>Rok produkcji</th>
+      <th></th>
+      <th></th>
+      </tr>
+
+      <tbody>
+    <tr class="" *ngFor="let vehicle of vehicles">
+      <td>{{vehicle.vehicleId}}</td>  <td>{{vehicle.brand}}</td> <td>{{vehicle.model}}</td>  <td>{{vehicle.color}}</td> <td>{{vehicle.productionYear}}</td>
+      <td><button (click)="Edit(vehicle)" class="btn btn-info">Edit</button></td>
+      <td> <button (click)="delete(vehicle)" class="btn btn-danger">X</button></td>
+      <div *ngIf="idEdit==vehicle.vehicleId">
+        <div class="form-group">
+          <label for="InputMark">Marka</label>
+          <input type="text" class="form-control" id="InputMark" [(ngModel)]="vehicle.brand"  placeholder="Marka">
+        </div>
+        <div class="form-group">
+          <label for="InputModel">Model</label>
+          <input type="text" class="form-control" id="InputModel"  [(ngModel)]="vehicle.model" placeholder="Model">
+        </div>
+        <div class="form-group">
+          <label for="InputColor">Color</label>
+          <input type="text" class="form-control" id="InputColor" [(ngModel)]="vehicle.color"  placeholder="Kolor">
+        </div>
+        <div class="form-group">
+          <label for="InputData">Rok Produkcji</label>
+          <input type="text" class="form-control" id="InputData" [(ngModel)]="vehicle.productionYear"  placeholder="Rok produkcji">
+        </div>
+        <button (click)="updateVehicle(vehicle)"  class="btn btn-primary btn-lg btn-block">Uaktualnij pojazd</button>
+      </div>
+    </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+</div>
